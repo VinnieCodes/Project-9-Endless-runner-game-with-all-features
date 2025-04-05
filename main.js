@@ -30,15 +30,16 @@ window.addEventListener("load", function () {
       this.enemyInterval = 1000;
       this.debug = false;
       this.score = 0;
-      this.winningScore = 40;
+      this.winningScore = 1;
       this.fontColor = "black";
       this.time = 0;
-      this.maxTime = 30000;
+      this.maxTime = 5000;
       this.gameOver = false;
       this.lives = 5;
-      this.music = new Audio();
-      this.music.src = "./assets/music.mp3";
+      this.music = new Audio("./assets/music.mp3");
       this.music.volume = 0.3;
+      this.lose = new Audio("./assets/lose.mp3");
+      this.win = new Audio("./assets/win.mp3");
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
     }
@@ -122,6 +123,11 @@ window.addEventListener("load", function () {
       game.music.play();
     } else {
       game.music.pause();
+      if (game.score >= game.winningScore) {
+        game.win.play();
+      } else {
+        game.lose.play();
+      }
     }
     if (!game.gameOver) {
       requestAnimationFrame(animate);
