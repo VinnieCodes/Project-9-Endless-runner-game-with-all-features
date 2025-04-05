@@ -41,6 +41,5 @@ export class CollisionAnimation {
     if (this.frameX > this.maxFrame) {
       this.markedForDeletion = true;
     }
-    console.log(this.game.collisions);
   }
 }

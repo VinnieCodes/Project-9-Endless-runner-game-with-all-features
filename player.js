@@ -28,6 +28,7 @@ export class Player {
     this.frameTimer = 0;
     this.speed = 0;
     this.maxSpeed = 10;
+    this.hurt = new Audio("./assets/hurt.mp3");
     this.states = [
       new Sitting(this.game),
       new Running(this.game),
@@ -120,9 +121,10 @@ export class Player {
         ) {
           this.game.score++;
           this.game.floatingMessages.push(
-            new FloatingMessage("+1", enemy.x, enemy.y, 100, 50)
+            new FloatingMessage("+1", enemy.x, enemy.y, 120, 60)
           );
         } else {
+          this.hurt.play();
           this.setState(6, 0);
           this.game.score -= 5;
           this.game.lives--;
