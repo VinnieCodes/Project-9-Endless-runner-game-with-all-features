@@ -36,6 +36,9 @@ window.addEventListener("load", function () {
       this.maxTime = 30000;
       this.gameOver = false;
       this.lives = 5;
+      this.music = new Audio();
+      this.music.src = "./assets/music.mp3";
+      this.music.volume = 0.3;
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
     }
@@ -104,8 +107,6 @@ window.addEventListener("load", function () {
         this.enemies.push(new GroundEnemy(this));
       else if (this.speed > 0) this.enemies.push(new ClimbingEnemy(this));
       this.enemies.push(new FlyingEnemy(this));
-      
-
     }
   }
   const game = new Game(canvas.width, canvas.height);
@@ -117,6 +118,11 @@ window.addEventListener("load", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.update(deltaTime);
     game.draw(ctx);
+    if (!game.gameOver) {
+      game.music.play();
+    } else {
+      game.music.pause();
+    }
     if (!game.gameOver) {
       requestAnimationFrame(animate);
     }
