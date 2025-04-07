@@ -30,7 +30,7 @@ export class Sitting extends State {
   handleInput(input) {
     if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
       this.game.player.setState(states.RUNNING, 1);
-    } else if (input.includes("r")) {
+    } else if (input.includes("r") && this.game.energy > 0) {
       this.game.player.setState(states.ROLLING, 2);
     }
   }
@@ -58,7 +58,7 @@ export class Running extends State {
       this.game.player.setState(states.SITTING, 0);
     } else if (input.includes("ArrowUp")) {
       this.game.player.setState(states.JUMPING, 1);
-    } else if (input.includes("r")) {
+    } else if (input.includes("r") && this.game.energy > 0) {
       this.game.player.setState(states.ROLLING, 2);
     }
   }
@@ -76,7 +76,7 @@ export class Jumping extends State {
   handleInput(input) {
     if (this.game.player.vy > this.game.player.weight) {
       this.game.player.setState(states.FALLING, 1);
-    } else if (input.includes("r")) {
+    } else if (input.includes("r") && this.game.energy > 0) {
       this.game.player.setState(states.ROLLING, 2);
     } else if (input.includes("ArrowDown")) {
       this.game.player.setState(states.DIVING, 0);
@@ -107,11 +107,25 @@ export class Rolling extends State {
     super("ROLLING", game);
   }
   enter() {
-    this.game.player.frameX = 0;
-    this.game.player.maxFrame = 6;
-    this.game.player.frameY = 6;
+    if (this.game.energy > 0) {
+      // Only enter if there is energy
+      this.game.player.frameX = 0;
+      this.game.player.maxFrame = 6;
+      this.game.player.frameY = 6;
+    } else {
+      this.game.player.setState(states.RUNNING, 1); // Transition to Running if no energy
+    }
   }
   handleInput(input) {
+    // Drain energy while rolling
+    this.game.energy = Math.max(this.game.energy - this.game.energyDrainRate, 0);
+
+    // If energy runs out, transition to Running state
+    if (this.game.energy <= 0) {
+      this.game.player.setState(states.RUNNING, 1);
+    }
+
+    // Handle other inputs
     this.game.particles.unshift(
       new Fire(
         this.game,
@@ -129,7 +143,7 @@ export class Rolling extends State {
       this.game.player.onGround()
     ) {
       this.game.player.vy -= 27;
-    } else if (input.includes("ArrowDown")&& !this.game.player.onGround()) {
+    } else if (input.includes("ArrowDown") && !this.game.player.onGround()) {
       this.game.player.setState(states.DIVING, 0);
     }
   }
@@ -164,7 +178,11 @@ export class Diving extends State {
           )
         );
       }
-    } else if (input.includes("r") && this.game.player.onGround()) {
+    } else if (
+      input.includes("r") &&
+      this.game.energy > 0 &&
+      this.game.player.onGround()
+    ) {
       this.game.player.setState(states.ROLLING, 2);
     }
   }

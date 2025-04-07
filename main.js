@@ -36,6 +36,10 @@ window.addEventListener("load", function () {
       this.maxTime = 30000;
       this.gameOver = false;
       this.lives = 5;
+      this.energy = 100;
+      this.maxEnergy = 100;
+      this.energyRegenerationRate = .005;
+      this.energyDrainRate = .1;
       this.music = document.getElementById('music');
       this.music.volume = 0.3;
       this.lose = document.getElementById("lose");
@@ -85,6 +89,13 @@ window.addEventListener("load", function () {
       this.floatingMessages = this.floatingMessages.filter(
         (message) => !message.markedForDeletion
       );
+      if (this.player.currentState !== this.player.states[4]) {
+        // Not in Rolling state
+        this.energy = Math.min(
+          this.energy + this.energyRegenerationRate * deltaTime,
+          this.maxEnergy
+        );
+      }
     }
     draw(context) {
       this.background.draw(context);
