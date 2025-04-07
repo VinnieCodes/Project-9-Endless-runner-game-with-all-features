@@ -38,7 +38,12 @@ export class UI {
         context.fillText(
           "What are creatures of the night afraid of? Yo hot breath",
           this.game.width * 0.5,
-          this.game.height * 0.5 + 20
+          this.game.height * 0.5 + 25
+        );
+        context.fillText(
+          "Press 'space' to restart",
+          this.game.width * 0.5,
+          this.game.height * 0.5 + 50
         );
       } else {
         context.fillText(
@@ -50,7 +55,12 @@ export class UI {
         context.fillText(
           "Nope, didn't think so",
           this.game.width * 0.5,
-          this.game.height * 0.5 + 20
+          this.game.height * 0.5 + 25
+        );
+        context.fillText(
+          "Press 'space' to restart",
+          this.game.width * 0.5,
+          this.game.height * 0.5 + 50
         );
       }
     }

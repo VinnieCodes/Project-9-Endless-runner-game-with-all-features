@@ -133,4 +133,12 @@ window.addEventListener("load", function () {
       requestAnimationFrame(animate);
     }
   })(0);
+  window.addEventListener("keydown", function (e) {
+    if (e.code === "Space" && game.gameOver) {
+      location.reload();
+    }
+  });
 });
+
+
+
