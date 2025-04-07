@@ -28,8 +28,8 @@ export class Player {
     this.frameTimer = 0;
     this.speed = 0;
     this.maxSpeed = 10;
-    this.hurt = new Audio("./assets/hurt.mp3");
-    this.kill = document.getElementById("punch-sound");
+    this.hurt = document.getElementById("hurt");
+    this.kill = document.getElementById("killPunch");
 
     this.states = [
       new Sitting(this.game),

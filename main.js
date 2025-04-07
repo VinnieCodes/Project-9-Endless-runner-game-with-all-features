@@ -36,10 +36,10 @@ window.addEventListener("load", function () {
       this.maxTime = 5000;
       this.gameOver = false;
       this.lives = 5;
-      this.music = new Audio("./assets/music.mp3");
+      this.music = document.getElementById('music');
       this.music.volume = 0.3;
-      this.lose = new Audio("./assets/lose.mp3");
-      this.win = new Audio("./assets/win.mp3");
+      this.lose = document.getElementById("lose");
+      this.win = document.getElementById("win");
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
     }
