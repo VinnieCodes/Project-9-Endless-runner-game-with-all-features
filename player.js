@@ -29,6 +29,8 @@ export class Player {
     this.speed = 0;
     this.maxSpeed = 10;
     this.hurt = new Audio("./assets/hurt.mp3");
+    this.kill = document.getElementById("punch-sound");
+
     this.states = [
       new Sitting(this.game),
       new Running(this.game),
@@ -119,6 +121,7 @@ export class Player {
           this.currentState === this.states[4] ||
           this.currentState === this.states[5]
         ) {
+          this.kill.cloneNode().play();
           this.game.score++;
           this.game.floatingMessages.push(
             new FloatingMessage("+1", enemy.x, enemy.y, 120, 60)
