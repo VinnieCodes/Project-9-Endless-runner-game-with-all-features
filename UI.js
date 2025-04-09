@@ -44,7 +44,7 @@ export class UI {
           this.game.height * 0.5 + 25
         );
         context.fillText(
-          "Press 'space' to restart",
+          "Press space to restart",
           this.game.width * 0.5,
           this.game.height * 0.5 + 50
         );
@@ -61,7 +61,7 @@ export class UI {
           this.game.height * 0.5 + 25
         );
         context.fillText(
-          "Press 'space' to restart",
+          "Press space to restart",
           this.game.width * 0.5,
           this.game.height * 0.5 + 50
         );

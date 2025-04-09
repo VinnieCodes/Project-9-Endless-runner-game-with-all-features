@@ -9,8 +9,8 @@ export class FloatingMessage {
     this.timer = 0;
   }
   update() {
-    this.x += (this.targetX - this.x) * 0.1;
-    this.y += (this.targetY - this.y) * 0.1;
+    this.x += (this.targetX - this.x) * 0.04;
+    this.y += (this.targetY - this.y) * 0.04;
     this.timer++;
     if (this.timer > 100) {
       this.markedForDeletion = true;

@@ -33,12 +33,12 @@ window.addEventListener("load", function () {
       this.winningScore = 40;
       this.fontColor = "black";
       this.time = 0;
-      this.maxTime = 30000;
+      this.maxTime = 50000;
       this.gameOver = false;
       this.lives = 5;
       this.energy = 100;
       this.maxEnergy = 100;
-      this.energyRegenerationRate = .005;
+      this.energyRegenerationRate = .008;
       this.energyDrainRate = .1;
       this.music = document.getElementById('music');
       this.music.volume = 0.3;
