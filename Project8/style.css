@@ -31,3 +31,8 @@ img {
   text-align: center;
   font-size: 80px;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
